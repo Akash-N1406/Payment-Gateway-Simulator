@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Gateway Simulator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Payment Gateway Simulator</h1>
+            <p class="subtitle">Secure payment processing with fraud detection</p>
+        </header>
+
+        <div class="main-content">
+            <div class="card">
+                <h2>Payment Information</h2>
+
+                <div class="payment-methods">
+                    <div class="payment-method active" data-method="card">
+                        <i class="fas fa-credit-card"></i>
+                        <div>Credit/Debit Card</div>
+                    </div>
+                    <div class="payment-method" data-method="paypal">
+                        <i class="fab fa-paypal"></i>
+                        <div>PayPal</div>
+                    </div>
+                    <div class="payment-method" data-method="bank">
+                        <i class="fas fa-university"></i>
+                        <div>Bank Account</div>
+                    </div>
+                </div>
+
+                <div class="alert alert-success" id="successAlert">
+                    <i class="fas fa-check-circle"></i> Payment processed successfully!
+                </div>
+
+                <div class="alert alert-danger" id="errorAlert">
+                    <i class="fas fa-exclamation-circle"></i> <span id="errorMessage">Payment failed. Please try
+                        again.</span>
+                </div>
+
+                <div class="alert alert-warning" id="warningAlert">
+                    <i class="fas fa-exclamation-triangle"></i> <span id="warningMessage">Potential fraud detected.
+                        Transaction flagged for review.</span>
+                </div>
+
+                <form id="paymentForm">
+                    <div class="form-group">
+                        <label for="amount">Amount (INR)</label>
+                        <input type="number" id="amount" min="1" max="1000000" value="1000.00" step="0.01" required>
+                    </div>
+
+                    <div id="cardPayment">
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number</label>
+                            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19"
+                                required>
+                            <small>Use test cards: 4242 4242 4242 4242 (success) or 4000 0000 0000 0002
+                                (declined)</small>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="expiryDate">Expiry Date</label>
+                                <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" placeholder="123" maxlength="4" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="paypalPayment" style="display: none;">
+                        <div class="form-group">
+                            <label for="paypalEmail">PayPal Email</label>
+                            <input type="email" id="paypalEmail" placeholder="example@paypal.com">
+                        </div>
+                    </div>
+
+                    <div id="bankPayment" style="display: none;">
+                        <div class="form-group">
+                            <label for="routingNumber">Routing Number</label>
+                            <input type="text" id="routingNumber" placeholder="123456789">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="accountNumber">Account Number</label>
+                            <input type="text" id="accountNumber" placeholder="0123456789">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">Cardholder Name</label>
+                        <input type="text" id="name" placeholder="John Doe" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="john.doe@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success" id="submitBtn">
+                            <i class="fas fa-lock"></i> Process Payment
+                        </button>
+                    </div>
+                </form>
+
+                <div class="token-display" id="tokenDisplay">
+                    Token: <span id="tokenValue"></span>
+                </div>
+
+                <div class="fraud-indicators" id="fraudIndicators">
+                    <h3><i class="fas fa-shield-alt"></i> Fraud Detection Indicators</h3>
+                    <ul id="fraudList">
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Transaction History</h2>
+
+                <div class="tabs">
+                    <div class="tab active" data-tab="all">All Transactions</div>
+                    <div class="tab" data-tab="successful">Successful</div>
+                    <div class="tab" data-tab="failed">Failed</div>
+                    <div class="tab" data-tab="fraud">Fraud Flags</div>
+                </div>
+
+                <div class="tab-content active" id="allTransactions">
+                    <div id="transactionList">
+                    </div>
+                </div>
+
+                <div class="tab-content" id="successfulTransactions">
+                    <div id="successfulList">
+                    </div>
+                </div>
+
+                <div class="tab-content" id="failedTransactions">
+                    <div id="failedList">
+                    </div>
+                </div>
+
+                <div class="tab-content" id="fraudTransactions">
+                    <div id="fraudListTab">
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 20px;">
+                    <button class="btn btn-danger" id="clearHistoryBtn">
+                        <i class="fas fa-trash"></i> Clear History
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
