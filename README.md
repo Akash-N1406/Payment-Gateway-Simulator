@@ -1,7 +1,3 @@
-Of course, here is a `README.md` file for your project.
-
------
-
 # Payment Gateway Simulator 💳
 
 A comprehensive front-end simulation of a modern payment gateway. This project demonstrates secure payment processing, multiple payment methods, transaction history, and a simulated fraud detection system. It's built entirely with vanilla HTML, CSS, and JavaScript, and uses `localStorage` to persist transaction history.
@@ -81,9 +77,3 @@ payment-gateway/
   * **Vanilla JavaScript** (ES6+)
 
 No external frameworks or libraries are used, except for Font Awesome for icons.
-
------
-
-## 📜 License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.
